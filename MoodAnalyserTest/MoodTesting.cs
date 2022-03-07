@@ -23,5 +23,15 @@ namespace MoodAnalyserTest
 
             Assert.AreEqual("HAPPY", Result);
         }
+
+
+        [TestMethod]
+        public void GivenNull_RetunHappy()
+        {
+            HappySad happySad = new HappySad(null);
+            string result = happySad.AnalysingMood();
+
+            Assert.AreEqual("HAPPY", result);
+        }
     }
 }

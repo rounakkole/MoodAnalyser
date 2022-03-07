@@ -20,15 +20,22 @@ namespace MoodAnalyser
 
         public string AnalysingMood()
         {
-            if (this.Message.ToUpper().Contains("HAPPY"))
+            try
             {
-                return "HAPPY";
+                if (this.Message.ToUpper().Contains("HAPPY"))
+                {
+                    return "HAPPY";
+                }
+                else if (this.Message.ToUpper().Contains("SAD"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
             }
-            if (this.Message.ToUpper().Contains("SAD"))
-            {
-                return "SAD".ToUpper();
-            }
-            else
+            catch (NullReferenceException)
             {
                 return "HAPPY";
             }
