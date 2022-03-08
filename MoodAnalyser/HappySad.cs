@@ -30,6 +30,10 @@ namespace MoodAnalyser
                 {
                     return "SAD";
                 }
+                else if(this.Message.ToUpper().Equals(string.Empty))
+                {
+                    throw new CustomException(CustomException.ExceptionType.EMPTY_MESSAGE, "message should not be empty");
+                }
                 else
                 {
                     return "HAPPY";
@@ -37,7 +41,7 @@ namespace MoodAnalyser
             }
             catch (NullReferenceException)
             {
-                return "HAPPY";
+                throw new CustomException(CustomException.ExceptionType.NULL_MESSAGE, "message should not be null");
             }
         }
     }

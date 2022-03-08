@@ -25,13 +25,42 @@ namespace MoodAnalyserTest
         }
 
 
-        [TestMethod]
+        /*[TestMethod]
         public void GivenNull_RetunHappy()
         {
             HappySad happySad = new HappySad(null);
             string result = happySad.AnalysingMood();
 
             Assert.AreEqual("HAPPY", result);
+        }*/
+
+
+        [TestMethod]
+        public void GivenNull_RetunCustomException()
+        {
+            try
+            {
+                HappySad happySad = new HappySad();
+                string result = happySad.AnalysingMood();
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual("message should not be null", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void GivenEmpty_RetunCustomException()
+        {
+            try
+            {
+                HappySad happySad = new HappySad("");
+                string result = happySad.AnalysingMood();
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual("message should not be empty", ex.Message);
+            }
         }
     }
 }
