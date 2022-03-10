@@ -70,11 +70,10 @@ namespace MoodAnalyserTest
         [TestMethod]
         public void GivingClassNameRight_ReturnsObject()
         {
-            //HappySad happySad = new HappySad();
-            object Expected = new HappySad();
+            HappySad happySad = new HappySad("lines");
             MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySad");
-            object MyObj = MoodAnalyserFactory.FactoryMethod(factory);
-            Expected.Equals(MyObj);
+            object MyObj = MoodAnalyserFactory.FactoryMethod(factory, "lines");
+            happySad.Equals(MyObj);
         }
 
 
@@ -83,8 +82,9 @@ namespace MoodAnalyserTest
         {
             try
             {
-                MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySad");
-                var MyObj = MoodAnalyserFactory.FactoryMethod(factory);
+                HappySad happySad = new HappySad("lines");
+                MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySa", "HappySad");
+                var MyObj = MoodAnalyserFactory.FactoryMethod(factory, "lines");
             }
             catch (CustomException ex)
             {
@@ -98,8 +98,9 @@ namespace MoodAnalyserTest
         {
             try
             {
+                HappySad happySad = new HappySad("lines");
                 MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySa");
-                var MyObj = MoodAnalyserFactory.FactoryMethod(factory);
+                var MyObj = MoodAnalyserFactory.FactoryMethod(factory, "lines");
             }
             catch (CustomException ex)
             {
