@@ -26,7 +26,7 @@ namespace MoodAnalyserTest
 
 
         /*[TestMethod]
-        public void GivenNull_RetunHappy()
+        public void GivenNull_ReturnHappy()
         {
             HappySad happySad = new HappySad(null);
             string result = happySad.AnalysingMood();
@@ -70,9 +70,9 @@ namespace MoodAnalyserTest
         [TestMethod]
         public void GivingClassNameRight_ReturnsObject()
         {
-            HappySad happySad = new HappySad("lines");
+            HappySad happySad = new HappySad();
             MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySad");
-            object MyObj = MoodAnalyserFactory.FactoryMethod(factory, "lines");
+            object MyObj = MoodAnalyserFactory.FactoryMethod(factory);
             happySad.Equals(MyObj);
         }
 
@@ -82,9 +82,9 @@ namespace MoodAnalyserTest
         {
             try
             {
-                HappySad happySad = new HappySad("lines");
+                HappySad happySad = new HappySad();
                 MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySa", "HappySad");
-                var MyObj = MoodAnalyserFactory.FactoryMethod(factory, "lines");
+                var MyObj = MoodAnalyserFactory.FactoryMethod(factory);
             }
             catch (CustomException ex)
             {
@@ -98,9 +98,9 @@ namespace MoodAnalyserTest
         {
             try
             {
-                HappySad happySad = new HappySad("lines");
+                HappySad happySad = new HappySad();
                 MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySa");
-                var MyObj = MoodAnalyserFactory.FactoryMethod(factory, "lines");
+                var MyObj = MoodAnalyserFactory.FactoryMethod(factory);
             }
             catch (CustomException ex)
             {
@@ -109,5 +109,31 @@ namespace MoodAnalyserTest
         }
 
 
+
+
+        [TestMethod]
+        public void GivingMessageRight_ReturnsObject()
+        {
+            HappySad happySad = new HappySad("iam Happy");
+            MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySad");
+            object MyObj = MoodAnalyserFactory.InvokeMethod(factory, "iam Happy");
+            happySad.Equals(MyObj);
+        }
+
+
+        [TestMethod]
+        public void GivingMessageWrong_RetunCustomException()
+        {
+            try
+            {
+                HappySad happySad = new HappySad("iam in any mood");
+                MoodAnalyserFactory factory = new MoodAnalyserFactory("MoodAnalyser.HappySad", "HappySad");
+                var MyObj = MoodAnalyserFactory.InvokeMethod(factory, "iam in any mood");
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual("class name is wrong", ex.Message);
+            }
+        }
     }
 }

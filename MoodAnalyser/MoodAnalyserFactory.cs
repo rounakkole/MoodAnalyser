@@ -18,21 +18,15 @@ namespace MoodAnalyser
         }
 
 
-        public static object FactoryMethod(MoodAnalyserFactory factory, string message)
+        public static object FactoryMethod(MoodAnalyserFactory factory)
         {
             if ("HappySad" == factory.Constructor)
             {
                 try
                 {
-                    /*Assembly executing = Assembly.GetExecutingAssembly();
-                    Type AnaylseType = executing.GetType(factory.ClassName);
-                    var MyObj= Activator.CreateInstance(AnaylseType);
-                    return MyObj;*/
-
                     Assembly executing = Assembly.GetExecutingAssembly();
                     Type AnaylseType = executing.GetType(factory.ClassName);
-                    ConstructorInfo ctor = AnaylseType.GetConstructor(new[] { typeof(string) });
-                    object MyObj = ctor.Invoke(new object[] { message });
+                    var MyObj= Activator.CreateInstance(AnaylseType);
                     return MyObj;
                 }
                 catch
@@ -43,6 +37,24 @@ namespace MoodAnalyser
             else
             {
                 throw new CustomException(CustomException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor name is wrong");
+            }
+        }
+
+
+
+        public static object InvokeMethod(MoodAnalyserFactory factory, string message)
+        {
+            try
+            {
+                Assembly executing = Assembly.GetExecutingAssembly();
+                Type AnaylseType = executing.GetType(factory.ClassName);
+                ConstructorInfo ctor = AnaylseType.GetConstructor(new[] { typeof(string) });
+                object MyObj = ctor.Invoke(new object[] { message });
+                return MyObj;
+            }
+            catch
+            {
+                throw new CustomException(CustomException.ExceptionType.CLASS_NOT_FOUND, "class name is wrong");
             }
         }
     }
