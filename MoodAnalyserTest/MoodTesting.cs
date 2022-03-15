@@ -135,5 +135,38 @@ namespace MoodAnalyserTest
                 Assert.AreEqual("class name is wrong", ex.Message);
             }
         }
+
+
+
+
+
+        [TestMethod]
+        public void GivingFieldName_Wrong_RetunCustomException()
+        {
+            string Expected = "wrong field name";
+            try
+            {
+                var result = Reflector.SetField("iam Happy", "WrongField");
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(Expected, ex.Message);
+            }
+        }
+           
+        [TestMethod]
+        public void GiveingMessage_Wrong_RetunCustomException()
+        {
+            string Expected = "message should not be null";
+            try
+            {
+                var result = Reflector.SetField(null, "Message");
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(Expected, ex.Message);
+            }
+        }
+
     }
 }
